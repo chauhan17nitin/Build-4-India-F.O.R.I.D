@@ -27,7 +27,6 @@ def add_user():
     # cursor = mysql.connection.cursor()
     cursor = connection.cursor()
     # user_info = request.json['user_info']
-
     user_name = request.json['user_name']
     first_name = request.json['first_name']
     last_name = request.json['last_name']
@@ -38,13 +37,13 @@ def add_user():
     state = request.json['state']
 
     query = "INSERT INTO user (user_name,first_name,last_name,dob,password,address,city,state) VALUES ( user_name, first_name, last_name, dob, password, address, city, state)"
-	try:
-	   cursor.execute(query) 
-	   cursor.close()   
-	   connection.commit()
-	   return jsonify({'code':200, 'message': 'user addition Successful'})
-	except Exception as e:
-       cursor.close()
-       return jsonify({'code':400, 'message': 'user addition Successful'})
+    try:
+	cursor.execute(query) 
+	cursor.close()   
+	connection.commit()
+	return jsonify({'code':200, 'message': 'user addition Successful'})
+    except Exception as e:
+        cursor.close()
+        return jsonify({'code':400, 'message': 'user addition Successful'})
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=80,debug=True)
