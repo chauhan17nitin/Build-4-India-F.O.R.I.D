@@ -39,12 +39,12 @@ def add_user():
 
     query = "INSERT INTO user (user_name,first_name,last_name,dob,password,address,city,state) VALUES ( user_name, first_name, last_name, dob, password, address, city, state)"
 	try:
-		cursor.execute(query) 
-		cursor.close()   
-		connection.commit()
-		return jsonify({'code':200, 'message': 'user addition Successful'})
+	   cursor.execute(query) 
+	   cursor.close()   
+	   connection.commit()
+	   return jsonify({'code':200, 'message': 'user addition Successful'})
 	except Exception as e:
-    	cursor.close()
-    	return jsonify({'code':400, 'message': 'user addition Successful'})
+       cursor.close()
+       return jsonify({'code':400, 'message': 'user addition Successful'})
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=80,debug=True)
