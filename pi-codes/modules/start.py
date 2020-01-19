@@ -1,36 +1,33 @@
-#import RPi.GPIO as GPIO
+from picamera import PiCamera
 from time import sleep
 from motion import motion
-#from capture import capture
-#from predict import predict
+from predict import Predict
+from servo import Servo
 
-	
+camera = PiCamera()
+    
 motion_obj = motion()
-motion_obj.forward()
-motion_obj.stop()
-#capture()
-motion_obj.forward()
-motion_obj.stop()
-motion_obj.forward()
-motion_obj.stop()
-motion_obj.forward()
-motion_obj.stop()
-#capture()
-#motion_obj.forward()
-#motion_obj.stop()
 
-#motion_obj.right()
-#motion_obj.stop()
-
-#motion_obj.left()
-#motion_obj.stop()
-
-#motion_obj.reverse()
-#motion_obj.stop()
-
-
-
-#print(predict())
+rows = 4
+cols = 2
+j=0
+i=0
+while(j<cols):
+    i=0
+    while(i<rows):
+        motion_obj.forward()
+        motion_obj.stop()
+        camera.start_preview()
+        sleep(1)
+        camera.capture('captured_img/'+str(j+1)+'_'+str(i+1)+'.jpg')
+        camera.stop_preview()
+        sleep(1)
+        i+=1
+    
+    print('take the turn')
+    j+=1
+Servo()
+print(Predict())
 
 
 

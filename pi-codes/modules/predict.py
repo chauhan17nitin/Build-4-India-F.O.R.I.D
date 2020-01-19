@@ -2,8 +2,10 @@ from keras import layers
 from keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
+import json
+import glob as glob
 
-def predict():
+def Predict():
   from keras.utils.generic_utils import CustomObjectScope
   with CustomObjectScope({'relu6': layers.ReLU(6.),'DepthwiseConv2D':layers.DepthwiseConv2D}):
       model = load_model('models/design1.h5')
@@ -20,18 +22,24 @@ def predict():
       img_tensor /= 255.                                      # imshow expects values in the range [0, 1]
 
       return img_tensor
-    
-  #img_path = 'C:/Users/Ferhat/Python Code/Workshop/Tensoorflow transfer learning/blue_tit.jpg'
-  img_path = '3.JPG'
-  new_image = load_image(img_path)
+  #img_path = 'captured_img/1_1.jpg'    
+  images = glob.glob('captured_img/*.jpg')
+  images.sort()
+  pred_arr = []
+  data = {}
+  for im in images:
+    new_image = load_image(im)
+    pred = model.predict(new_image)
+    pred = np.argmax(pred)
+    pred_arr.append(pred)
+    data = {'pred_arr': pred_arr}
+    with open('send.json', 'w') as outfile:
+      j = json.dump(data, outfile,indent=4)
+    print ("the class for "+im+" is: " + str(pred))
+  return pred_arr
+  
 
-  pred = model.predict(new_image)
-  pred = np.argmax(pred)
-  print ("the class is: " + str(pred))
-  return pred
-  
-  
-predict()
+#predict()
 # import h5py
 
 # f = h5py.File('models/design_final.h5', 'r')

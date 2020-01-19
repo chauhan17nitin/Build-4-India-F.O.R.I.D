@@ -4,7 +4,7 @@ from time import sleep
 class motion(): 
     def __init__(self): 
         
-        GPIO.setmode(GPIO.BOARD)
+        #GPIO.setmode(GPIO.BOARD)
      
         self.IN1 = 16
         self.IN2 = 18
