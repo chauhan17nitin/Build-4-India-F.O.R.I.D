@@ -4,14 +4,14 @@ from time import sleep
 class motion(): 
     def __init__(self): 
         
-        GPIO.setmode(GPIO.BOARD)
+        #GPIO.setmode(GPIO.BOARD)
      
-        self.IN1 = 16
-        self.IN2 = 18
-        self.IN3 = 22
-        self.IN4 = 24   
-        self.ENA = 13
-        self.ENB = 15 
+        self.IN1 = 23 #pin 16
+        self.IN2 = 24 #pin 18
+        self.IN3 = 25 #pin 22
+        self.IN4 = 8  #pin 24   
+        self.ENA = 27 #pin 13
+        self.ENB = 22 #pin 15
 
         GPIO.setwarnings(False)
 
@@ -45,7 +45,7 @@ class motion():
         #GPIO.cleanup()
         
 
-    def right(self):
+    def left(self):
         print("RIGHT TURN")
         GPIO.output(self.IN1,GPIO.LOW)
         GPIO.output(self.IN2,GPIO.HIGH)
@@ -55,8 +55,8 @@ class motion():
         #GPIO.output(ENB,GPIO.LOW)
         sleep(1)
 
-    def left(self):
-        print("LEFT TURN")
+    def right(self):
+        print("RIGHT TURN")
         GPIO.output(self.IN1,GPIO.HIGH)
         GPIO.output(self.IN2,GPIO.LOW)
         GPIO.output(self.IN3,GPIO.LOW)
